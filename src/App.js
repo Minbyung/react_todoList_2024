@@ -1,32 +1,27 @@
 import { AppBar, Toolbar } from "@mui/material";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation, NavLink } from "react-router-dom";
 
-function MainPage() {
-  return (
-    <>
-      <h1>메인 페이지</h1>
-    </>
-  );
-}
-
-function Sub1Page() {
-  return (
-    <>
-      <h1>서브 1 페이지</h1>
-    </>
-  );
-}
-
-
+import MainPage from "./components/MainPage";
+import Sub1Page from "./components/Sub1Page";
 
 function App() {
+const location = useLocation();
+
   return (
     <>
       <AppBar position="static">
         <Toolbar>
           <div className="flex-1"></div>
           <div className="flex-bold">TODO</div>
-          <div className="flex-1"></div>
+          <div className="flex-1 flex justify-end">
+            {location.pathname != "/sub1" && (
+              <NavLink to="/sub1">서브1</NavLink>
+            )}
+            
+            {location.pathname == "/sub1" && (
+              <NavLink to="/main">메인</NavLink>
+            )}
+          </div>
         </Toolbar>
       </AppBar>
 
